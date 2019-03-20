@@ -27,7 +27,7 @@ class TaskList extends Component {
   }
 
   componentDidUpdate(){
-    console.log(this.state.label);
+    console.log("items: ",this.state.items)
   }
 
   addItem(newItem){
@@ -38,11 +38,10 @@ class TaskList extends Component {
     });
   }
 
-  deleteItem(key) {
-    var filteredItems = this.state.items.filter(function (item) {
-      return (item.key !== key);
-    });
-   
+  deleteItem(txtToDelete) {
+    console.log("who: ",txtToDelete)
+    var filteredItems = this.state.items.filter((item) => (item.txt !== txtToDelete)); 
+    console.log("filtred: ",filteredItems);
     this.setState({
       items: filteredItems
     });

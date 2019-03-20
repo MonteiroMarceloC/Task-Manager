@@ -34,7 +34,6 @@ class AddField extends Component {
         var who = Array.prototype.slice.call(e.target.childNodes).filter((o)=>(o.selected));
         this.setState({selectedLabel: who[0].value,
         selectBG: who[0].style.backgroundColor});
-
     }
 
     addItem(e){
@@ -45,13 +44,18 @@ class AddField extends Component {
               labelText: this.state.selectedLabel,
               labelColor: this.state.selectBG,
             };
-            this.setState({showinput: false});
+            this.setState({
+              showinput: false,
+              selectedLabel: 'All',
+              selectBG: '#aaa',
+            });
             this._inputElement.value="";
             this.props.add(newItem);
           }
         } else{
           this.setState({showinput: true});
         }
+        console.log(this.state.selectedLabel);
       }
 
     render() {

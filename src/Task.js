@@ -25,8 +25,9 @@ class Task extends Component {
     this.setState({itemChecked: !this.state.itemChecked});
   }
 
-  delete(key){
-    this.props.delete(key);
+  delete(){
+    console.log("delclicked: ",this.props.txt)
+    this.props.delete(this.props.txt);
   }
   
   render() {
@@ -35,10 +36,10 @@ class Task extends Component {
           key={this.props.key}>
           <Checkbox id="unchecked" label={this.props.txt} />
           <div className='lateral-task'>
-            <div class="dot" style={{backgroundColor: this.props.labelColor}}> 
+            <div className="dot" style={{backgroundColor: this.props.labelColor}}> 
             </div>
             <button className="delete-btn"
-                    onClick ={()=>this.delete(this.props.key)}>
+                    onClick ={this.delete}>
             <img src={trash} className="delete-btn-img" alt="delete"/>
             </button>
           </div>
