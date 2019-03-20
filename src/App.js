@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import logo from './shopping-list.svg';
+import './index.css';
+import TaskList from './TaskList'
 
 class App extends Component {
   render() {
@@ -8,18 +9,12 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
+          <p className='App-intro'>
+            My Task Manager
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          {/* Inserir uma imagem aqui */}
         </header>
+        <TaskList/>
       </div>
     );
   }
