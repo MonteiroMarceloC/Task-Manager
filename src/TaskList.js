@@ -24,43 +24,58 @@ class TaskList extends Component {
     this.state= {
       items: [],
       label: 'All',
-      alertshow: false,
+      showalert: false
     }
-
     this.addItem = this.addItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this); 
-    this.showalert = this.showalert.bind(this);  
-    this.updateItem = this.updateItem.bind(this);  
-
+    this.updateItem = this.updateItem.bind(this); 
+    this.showMyalert = this.showMyalert.bind(this);
   }
 
+
+  //CHECKING CONNECTION WITH FIREBASE AND LOADING DATA
   componentDidMount(){
     var currcomp = this;
-    var ref =  db.orderByChild('key');
-    ref.on('value',function(snap) {
-      if(snap.val()){
-        var myarray = Object.values(snap.val());
-        currcomp.setState({items: myarray, connected: true});
-      } else{
-        currcomp.setState({connected: false})
-        currcomp.timer = setInterval(function(){
-          currcomp.setState({connected: true});
-          clearInterval(this.timer);
-          }, 2000);
-        }
-    });
+    //test conection
+    let firebaseRef = firebase.database().ref();
+    firebaseRef.child('.info/connected').on('value', function(connectedSnap) {
+      if (connectedSnap.val() === true) {
+        //get items
+        let ref =  db.orderByChild('key');
+        ref.on('value',function(snap) {
+          if(snap.val()){
+            var myarray = Object.values(snap.val());
+            currcomp.setState({items: myarray, connected: true});
+          }  
+          else{ //in case there list is empty
+            currcomp.setState({connected: true});
+          }
+        }); 
+      } else {//connection failed: show alert
+         console.log("fail");
+          var intervalId = setInterval(currcomp.showMyalert, 3000);
+          currcomp.setState({intervalId});
+      }
+    }); 
+  }
+
+  showMyalert(){
+    this.setState({showalert: true});
+    clearInterval(this.state.intervalId);
   }
 
   componentDidUpdate(){
     console.log("items: ",this.state.items);
   }
 
+
+  // TASK MANEGER MAIN CONTROLS
+
   addItem(newItem){
     newItem['key']=this.state.items.length;
     var newref=db.push();
     newref.set(newItem);
   }
-
 
   deleteItem(txtToDelete) {
     var ref =  db.orderByChild('txt');
@@ -85,15 +100,12 @@ class TaskList extends Component {
       }
     });
   }
-
-  showalert(){
-    
-  }
   
   render() {
     return (
       <>
-      { this.state.connected &&
+      {//THAT HERE IS THE LIST
+      this.state.connected &&
       <div className="Task-list-cont">
         <div className='task-label-cont'>
         {taskLabels.map((e)=>(
@@ -114,14 +126,17 @@ class TaskList extends Component {
       </div>
       }
 
-      { !this.state.connected &&
+      { //SHOW IN CASE OF ISSUES
+        !this.state.connected &&
         <div className="load">
           <br/><br/>        
           <ReactLoading type='spin' color="#fff" />
           <br/><br/>
+         { this.state.showalert && 
           <span className="alert">
             It looks like you are offline.<br/>Please go online so that the Task Manager can work perfectly. =)
           </span>
+         }
         </div>
       }
       </>

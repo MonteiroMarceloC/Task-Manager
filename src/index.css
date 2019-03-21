@@ -269,11 +269,3 @@ h1 span {
   font-weight: bold;
   transition: 2s
 }
-
-.alert{
-  display: none;
-}
-
-.alert.hide{
-  display: flex;
-}
