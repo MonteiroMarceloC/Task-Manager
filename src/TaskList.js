@@ -48,7 +48,7 @@ class TaskList extends Component {
             currcomp.setState({items: myarray, connected: true});
           }  
           else{ //in case there list is empty
-            currcomp.setState({connected: true});
+            currcomp.setState({items: [], connected: true});
           }
         }); 
       } else {//connection failed: show alert
