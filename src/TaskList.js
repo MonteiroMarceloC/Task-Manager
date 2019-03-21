@@ -72,9 +72,11 @@ class TaskList extends Component {
   // TASK MANEGER MAIN CONTROLS
 
   addItem(newItem){
-    newItem['key']=this.state.items.length;
-    var newref=db.push();
-    newref.set(newItem);
+  	if(newItem.txt!==''){
+	    newItem['key']=this.state.items.length;
+	    var newref=db.push();
+	    newref.set(newItem);
+	}
   }
 
   deleteItem(txtToDelete) {
