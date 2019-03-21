@@ -43,6 +43,7 @@ class AddField extends Component {
               txt: this._inputElement.value,
               labelText: this.state.selectedLabel,
               labelColor: this.state.selectBG,
+              isChecked: false,
             };
             this.setState({
               showinput: false,
@@ -65,7 +66,7 @@ class AddField extends Component {
             {this.state.showinput &&
             <>
               <input className='add-input' 
-                    placeholder="New to do"
+                    placeholder="Add new task"
                     autoFocus
                     ref={(a)=> this._inputElement=a}>
               </input>

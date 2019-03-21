@@ -6,6 +6,15 @@ class TaskItems extends Component {
   constructor(props){
     super(props);
   }
+
+  componentDidMount(){
+    console.log("entires mount: ",this.props.entries);
+
+  }
+
+  componentDidUpdate(){
+    console.log("entires: ",this.props.entries);
+  }
  
   render() {
     var filteredItems = this.props.entries.filter((e)=>(
@@ -14,8 +23,11 @@ class TaskItems extends Component {
     
     var listItems = filteredItems.map((i)=>(
       <Task delete ={this.props.delete}
-                key={i.key} txt={i.txt}
-                labelColor={i.labelColor}>
+            changed={this.props.changed2}
+              key={i.key} txt={i.txt}
+              labelColor={i.labelColor}
+              labelText={i.labelText}
+              isChecked={i.isChecked}>
         </Task>
     ));
   

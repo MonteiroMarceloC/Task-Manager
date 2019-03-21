@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 
 class Checkbox extends React.Component {
-    
+  constructor(props){
+    super(props);
+    this.state={
+      
+    }
+    this.handleChange = this.handleChange.bind(this);
+
+  }
     
     static propTypes = {
       hasError: PropTypes.bool,
@@ -27,9 +34,12 @@ class Checkbox extends React.Component {
         this.selector.indeterminate = this.props.indeterminate;
       }
     }
-  
+    handleChange(e){
+      this.props.handleChange(!this.props.isChecked);
+    }
+
     render() {
-      const { id, label, type, indeterminate, hasError, ...inputProps } = this.props;
+      const { id, label, type, indeterminate, hasError, isChecked, handleChange,...inputProps } = this.props;
       const checkboxClassname = `
         m-checkbox
         ${type === 'switch' && 'm-checkbox--switch'}
@@ -54,6 +64,8 @@ class Checkbox extends React.Component {
             className={inputClassname}
             ref={el => (this.selector = el)}
             id={id}
+            checked = {this.props.isChecked}
+            onClick={this.handleChange}
             {...inputProps}
           />
         <label className={labelClassname} htmlFor={id}>{label}</label>
