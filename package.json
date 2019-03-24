@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "babel-loader": "^8.0.5",
+    "firebase": "^5.9.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-flip-move": "^3.0.3",

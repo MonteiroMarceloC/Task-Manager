@@ -36,27 +36,29 @@ class AddField extends Component {
         selectBG: who[0].style.backgroundColor});
     }
 
-    addItem(e){
+    addItem(){
         if(this.state.showinput){
-          if(e.target.value!==""){
+          if(this._inputElement.value !== ''){
             var newItem = {
               txt: this._inputElement.value,
               labelText: this.state.selectedLabel,
               labelColor: this.state.selectBG,
               isChecked: false,
             };
-            this.setState({
+            this._inputElement.value="";
+            this.props.add(newItem);
+            console.log("add item",this.state.selectedLabel);
+          }
+
+          this.setState({
               showinput: false,
               selectedLabel: 'All',
               selectBG: '#aaa',
             });
-            this._inputElement.value="";
-            this.props.add(newItem);
-          }
-        } else{
+
+        } else {
           this.setState({showinput: true});
         }
-        console.log(this.state.selectedLabel);
       }
 
     render() {

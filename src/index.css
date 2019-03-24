@@ -35,6 +35,8 @@ body {
 
 .App-intro {
   font-size: large;
+  font-weight: bold; 
+
 }
 
 /* Task List */
@@ -45,8 +47,8 @@ body {
   font-family: sans-serif;
   display: flex;
   align-self: center;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: flex-start;
   flex-direction: column;
 }
 
@@ -65,11 +67,14 @@ body {
   border: none;
   text-align: center;
   justify-content: center;
+  align-items: center;
 }
 
 .label-text{
   color: white;
-  font-size: medium;
+  font-size: large;
+  font-weight: bold; 
+
 }
 
 /* Add Task Field */
@@ -237,7 +242,7 @@ h1 span {
   left: 2px;
 }
 
-@media only screen and (max-width: 420px){
+@media only screen and (max-width: 550px){
   .Task-list-cont{
     width: 90%;
     padding: 20px 20px;
@@ -255,6 +260,9 @@ h1 span {
   } 
   .delete-btn-img{
     height: 1.2rem;
+  }
+  .task-label{
+    font-size: 16px;
   }
 }
 
